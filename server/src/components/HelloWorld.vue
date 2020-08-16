@@ -1,10 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div id="chart_div">
+    <div id="regions_div">
     </div>
   </div>
 </template>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 export default {
   name: 'HelloWorld',
@@ -13,39 +14,76 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  mounted: function() {
+  mounted: function () {
     google.charts.load('current', {
-    'packages': ['map'],
-    // Note: you will need to get a mapsApiKey for your project.
-    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-    });
-    google.charts.setOnLoadCallback(drawMap);
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': ''
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
 
-    function drawMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['Country', 'Population'],
-        ['China', 'China: 1,363,800,000'],
-        ['India', 'India: 1,242,620,000'],
-        ['US', 'US: 317,842,000'],
-        ['Indonesia', 'Indonesia: 247,424,598'],
-        ['Brazil', 'Brazil: 201,032,714'],
-        ['Pakistan', 'Pakistan: 186,134,000'],
-        ['Nigeria', 'Nigeria: 173,615,000'],
-        ['Bangladesh', 'Bangladesh: 152,518,015'],
-        ['Russia', 'Russia: 146,019,512'],
-        ['Japan', 'Japan: 127,120,000']
-      ]);
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['都道府県', '写真'],
+          ['北海道', 0],
+          ['青森', 0],
+          ['秋田', 0],
+          ['岩手', 0],
+          ['宮城', 0],
+          ['山形', 0],
+          ['福島', 0],
+          ['栃木', 0],
+          ['群馬', 0],
+          ['茨城', 0],
+          ['東京', 0],
+          ['埼玉', 0],
+          ['千葉', 0],
+          ['神奈川', 0],
+          ['静岡', 0],
+          ['愛知', 0],
+          ['岐阜', 0],
+          ['三重', 0],
+          ['滋賀', 0],
+          ['京都', 0],
+          ['大阪', 0],
+          ['奈良', 0],
+          ['和歌山', 0],
+          ['兵庫', 0],
+          ['徳島', 0],
+          ['香川', 0],
+          ['愛媛', 0],
+          ['高知', 0],
+          ['福岡', 0],
+          ['佐賀', 0],
+          ['長崎', 0],
+          ['大分', 0],
+          ['熊本', 0],
+          ['宮崎', 0],
+          ['鹿児島',0],
+          ['沖縄', 0],
+          ['岡山', 0],
+          ['広島', 0],
+          ['山口', 0],
+          ['鳥取', 0],
+          ['島根', 0],
+          ['石川', 0],
+          ['福井', 0],
+          ['富山', 0],
+          ['山梨', 0],
+          ['長野', 0],
+          ['新潟', 0]
+        ]);
 
-    var options = {
-      showTooltip: true,
-      showInfoWindow: true
-    };
+        var options = {
+          region: 'JP',
+          resolution: 'provinces'
+        };
 
-    var map = new google.visualization.Map(document.getElementById('chart_div'));
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-    map.draw(data, options);
-  };
+        chart.draw(data, options);
+      }
   }
 }
 </script>
